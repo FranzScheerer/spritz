@@ -2,19 +2,9 @@
 #include <stddef.h>
 #include <string.h>
 
-#include "spritz.h"
-
 #define N 256
 
-#if defined(_MSC_VER)
-# define ALIGNED(S) __declspec(align(S))
-#elif defined(__GNUC__)
-# define ALIGNED(S) __attribute__((aligned(S)))
-#else
-# define ALIGNED(S)
-#endif
-
-ALIGNED(64) typedef struct State_ {
+typedef struct State_ {
     unsigned char s[N];
     unsigned char a;
     unsigned char i;
@@ -30,16 +20,7 @@ ALIGNED(64) typedef struct State_ {
 static void
 memzero(void *pnt, size_t len)
 {
-#ifdef _WIN32
-    SecureZeroMemory(pnt, len);
-#else
-    volatile unsigned char *pnt_ = (volatile unsigned char *) pnt;
-    size_t                     i = (size_t) 0U;
-
-    while (i < len) {
-        pnt_[i++] = 0U;
-    }
-#endif
+     ;
 }
 
 static void
