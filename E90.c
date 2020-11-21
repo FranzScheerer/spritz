@@ -72,6 +72,7 @@ int main(int argn, char **argv){
  while ((c = fgetc(stdin)) != -1){
     cc = c ^ output(&sa) ^ output(&sb);
     absorb_byte(&sb, cc);
+    update(&sa);
     fprintf(stdout,"%c", cc);
  }
  for (i=0;i<32;i++){
